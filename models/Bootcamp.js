@@ -44,11 +44,10 @@ location: {
     type: {
         type: String,
         enum: ['Point'],
-        required: true
+       
       },
       coordinates: {
         type: [Number],
-        required: true,
         index: '2dsphere'
 
       },
@@ -59,7 +58,7 @@ location: {
       zipcode: String,
       country: String
 },
-carrer: {
+careers: {
     //Array pf strings
     type: [String],
     required: true,
