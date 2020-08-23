@@ -1,0 +1,17 @@
+{
+  "name": "devcamper",
+  "version": "1.0.0",
+  "description": "DevCamper backend api",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node server.js",
+    "dev": "nodemon server"
+  },
+  "author": "Eric Naiman",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}
