@@ -1,12 +1,16 @@
 const express = require('express');
 const dontenv =require('dotenv');
-const morgan = require('morgan')
-
-//Route Files
-const bootcamps = require('./routes/bootcamps')
+const morgan = require('morgan');
+const connectDB = require('./config/db')
 
 // Load env vars
 dontenv.config({path: './config/config.env'});
+
+// Connect to DB
+connectDB();
+
+//Route Files
+const bootcamps = require('./routes/bootcamps')
 
 const app = express();
 
