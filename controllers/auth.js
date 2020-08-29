@@ -16,7 +16,7 @@ exports.register = asyncHandler(async (req, res, next) => {
     role,
   });
 
-  sendTokenResponse(user, 200, res)
+  sendTokenResponse(user, 200, res);
 });
 
 // @desc Login user
@@ -44,7 +44,7 @@ exports.login = asyncHandler(async (req, res, next) => {
     return next(new ErrorResponse("Invalid credentials", 401));
   }
 
- sendTokenResponse(user, 200, res)
+  sendTokenResponse(user, 200, res);
 });
 
 //Get token from model, create cookie and send response
@@ -59,7 +59,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     httpOnly: true,
   };
 
-  if(process.env.NODE_ENV === 'production'){
+  if (process.env.NODE_ENV === "production") {
     options.secure = true;
   }
 
@@ -68,3 +68,13 @@ const sendTokenResponse = (user, statusCode, res) => {
     token,
   });
 };
+
+// @desc Get current logged in user
+// @route POST /api/v1/auth/me
+// @access Private
+
+exports.getMe = asyncHandler(async (req, res, next) => {
+  const user = await User.findById(req.user.id);
+
+  res.status(200).json({ success: true, data: user });
+});
