@@ -128,7 +128,7 @@ exports.getBootcampInRadius = asyncHandler(async (req, res, next) => {
   });
 });
 
-// @desc Upload phot for bootcamp
+// @desc Upload phot0 for bootcamp
 // @route PUT /api/v1/bootcamps/:id/photo
 // @access Private
 exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
@@ -139,6 +139,13 @@ exports.bootcampPhotoUpload = asyncHandler(async (req, res, next) => {
       new ErrorResponse(`Bootcamp not found with id of ${req.params.id}`, 404)
     );
   }
+
+   //Make sure user is bootcamp owner
+if(bootcamp.user.toString() !== req.user.id && req.user.role !== 'admin') {
+  return next
+  (new ErrorResponse(`User ${req.params.id} is not authorized to update this bootcamp`, 401)
+  )
+}
 
   if (!req.files) {
     return next(new ErrorResponse(`Please upload a file`, 400));
